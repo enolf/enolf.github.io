@@ -451,9 +451,9 @@ ninja.data = [{
             },},{id: "news-a-simple-inline-announcement-with-markdown-emoji-sparkles-smile",
           title: 'A simple inline announcement with Markdown emoji! :sparkles: :smile:',
           description: "",
-          section: "News",},{id: "projects-project-1",
-          title: 'project 1',
-          description: "with background image",
+          section: "News",},{id: "projects-pico-electrochemical-analyser",
+          title: 'Pico Electrochemical Analyser',
+          description: "A low-cost, high-precision potentiostat/galvanostat built with the Raspberry Pi Pico.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/pico-analyser/";
             },},{id: "teachings-data-science-fundamentals",
