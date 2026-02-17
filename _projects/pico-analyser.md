@@ -55,15 +55,3 @@ The firmware is written in **C** for maximum performance during ADC sampling, wi
 <a href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-2500.jpg" data-lightbox="roadtrip"><img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-200.jpg" /></a>
 
 ---
-
-<!-- <div class="row">
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.html path="assets/img/pico_setup.jpg" title="Pico Prototype" class="img-fluid rounded z-depth-1" %}
-    </div>
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.html path="assets/img/cv_plot.jpg" title="Cyclic Voltammetry Plot" class="img-fluid rounded z-depth-1" %}
-    </div>
-</div>
-<div class="caption">
-    Left: The current prototype setup at JCU. Right: Sample data output showing a standard Ferricyanide redox couple.
-</div> -->
