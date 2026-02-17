@@ -2,10 +2,11 @@
 layout: page
 title: Pico Electrochemical Analyser
 description: A low-cost, high-precision potentiostat/galvanostat built with the Raspberry Pi Pico.
-# img: assets/img/pico_teaser.jpg
 importance: 1
 category: Engineering & Chemistry
 related_publications: false
+images:
+  lightbox2: true
 ---
 
 ## Overview
