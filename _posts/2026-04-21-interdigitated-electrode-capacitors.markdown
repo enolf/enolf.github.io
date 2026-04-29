@@ -14,6 +14,6 @@ Liquid - the substance we are measuring. Let's focus on water for now
 Level - think height, if the shape of the container is known (i.e. the formula describing its volume) then we can describe either volume or height interchangeably
 Sensor - The device that reacts to a change in energy of its environment and transforms produces a quantisable amount of energy. In this case we are quantising capacitance, thus we are dealing with an electric sensor. -->
 
-Much has been [written][https://learn.bwp.io/sensor-technologies/chapter4/notes/#capacitive-level-sensors] about these sensors.
+Much has been [written](https://learn.bwp.io/sensor-technologies/chapter4/notes/#capacitive-level-sensors) about these sensors.
 
 
