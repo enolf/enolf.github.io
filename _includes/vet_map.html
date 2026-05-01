@@ -27,6 +27,8 @@
         let geoLayer; // stores geoJSON overlays
         let tickData; // stores pest data
 
+        var geojson;
+
         // Color function for the shading
         function getColor(pest) {
             return  pest > 25 ? '#08589e':
@@ -38,30 +40,74 @@
                                 '#f0f9e8';
         }
 
+        function getStyle(selectedMonth) {
+            const id = feature.properties.suburb_id;
+            const cases = tickData[id][selectedMonth] || 0; // pull data from stats file
+            return {
+                fillColor: getColor(cases),
+                weight: 1,
+                opacity: 1,
+                color: 'white',
+                fillOpacity: 0.7
+            };
+        }
+
         // Updates map based on month
         function updateMap(monthIndex) {
             const selectedMonth = months[monthIndex];
             document.getElementById('month-label').innerText = monthNames[monthIndex]; // update month on slider
 
             if (geoLayer) { // guard incase map needs to update before data is loaded
-                geoLayer.setStyle(feature => {
-                    const id = feature.properties.suburb_id;
-                    const cases = tickData[id][selectedMonth] || 0; // pull data from stats file
-                    return {
-                        fillColor: getColor(cases),
-                        weight: 1,
-                        opacity: 1,
-                        color: 'white',
-                        fillOpacity: 0.7
-                    };
-                });
+                // geoLayer.setStyle(feature => {
+                //     const id = feature.properties.suburb_id;
+                //     const cases = tickData[id][selectedMonth] || 0; // pull data from stats file
+                //     return {
+                //         fillColor: getColor(cases),
+                //         weight: 1,
+                //         opacity: 1,
+                //         color: 'white',
+                //         fillOpacity: 0.7
+                //     };
+                // });
+
+                geoLayer.setStyle(getStyle(selectedMonth));
+
             }
         }
+
+        // function highlightSuburb(e) {
+        //     var layer = e.target;
+
+        //     layer.setStyle({
+        //         weight: 3,
+        //         color: '#777',
+        //         dashArray: '1',
+        //         fillOpacity: 0.7
+        //     });
+
+        //     layer.bringToFront();
+        // }
         
+        // function resetHighlight(e) {
+        //     geojson.resetStyle(e.target);
+        // }
+
+        // function zoomToSuburb(e) {
+        //     map.fitBounds(e.target.getBounds());
+        // }
+
+        // function onEachSuburb(suburb, layer) {
+        //     layer.on({
+        //         mouseover: highlightSuburb,
+        //         mouseout: resetHighlight,
+        //         click: zoomToSuburb
+        //     });
+        // }
+
         async function initMap() {
             map = L.map('map').setView([-16.920298801405686, 145.77101107749607], 12);
             
-            L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}.png', {
+            L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_nolabels/{z}/{x}/{y}.png', {
                 maxZoom: 19,
                 attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
             }).addTo(map);
@@ -72,7 +118,7 @@
                     fetch("{{ '/assets/data/tick-stats.json' | relative_url }}")
                 ]);
 
-                var geojson = await geoRes.json();
+                geojson = await geoRes.json();
                 tickData = await statsRes.json();
 
                 geoLayer = L.geoJSON(geojson).addTo(map);
