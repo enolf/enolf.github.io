@@ -1,0 +1,42 @@
+<!-- 1. Grid.js Dependencies -->
+<link href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css" rel="stylesheet" />
+<script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
+
+<!-- 2. Table Container -->
+<div id="data-table-container"></div>
+
+<!-- 3. Table Logic -->
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    new gridjs.Grid({
+      // Define your column headers exactly as they appear in your CSV/JSON
+      columns: ["Name", "Category", "Date", "Status"],
+      
+      // Features
+      search: true,
+      sort: true,
+      pagination: {
+        limit: 10
+      },
+      resizable: true,
+      
+      // Data Loading
+      server: {
+        url: "{{ '/assets/data/table-data.json' | relative_url }}",
+        then: data => data.map(row => [
+          row.Name, 
+          row.Category, 
+          row.Date, 
+          row.Status
+        ])
+      },
+      
+      // Styling
+      style: {
+        table: {
+          'font-size': '14px'
+        }
+      }
+    }).render(document.getElementById("data-table-container"));
+  });
+</script>
