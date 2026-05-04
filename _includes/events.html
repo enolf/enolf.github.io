@@ -48,6 +48,7 @@
                 columns: [
                     {
                     name: "Date",
+                    width: "100px",
                         sort: { compare: compareDates}
                     },
                     "Event Name",
@@ -55,6 +56,7 @@
                     {
                         name: "Link",
                         // The formatter intercepts the data before it hits the table
+                        width: "100px",
                         formatter: (cell) => {
                         if (cell === "TBA" || !cell) return "TBA";
                         return gridjs.html(`
@@ -95,7 +97,8 @@
                 // Styling
                 style: {
                     table: {
-                    'font-size': '14px'
+                    'font-size': '14px',
+                    'padding': '0px'
                     }
                 }
             }).render(document.getElementById(containerId));
