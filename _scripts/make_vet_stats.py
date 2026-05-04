@@ -12,7 +12,7 @@ def slugify(text):
     return re.sub(r'\s+', '-', text)
 
 # 1. Load the GeoJSON
-geojson_path = 'assets/maps/cairnsRegionSuburbs.json'
+geojson_path = 'assets/maps/cairns.json'
 with open(geojson_path, 'r') as f:
     geojson_data = json.load(f)
 
