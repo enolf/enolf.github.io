@@ -1,4 +1,4 @@
-This is a portfolio of my projects (hobby or academic). I am an undergraduate engineering student majoring in Electronic Systems and Internet of Things Engineerins.
+This is a portfolio of my projects (hobby or academic). I am an undergraduate engineering student majoring in Electronic Systems and Internet of Things Engineering additionally to studying chemistry.
 
 Currently the function of this site is to host some of the projects which I am myself as well as demonstare projects which I have built or partaken in building.
 
