@@ -1,0 +1,109 @@
+<!-- 1. Grid.js Dependencies -->
+<link href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css" rel="stylesheet" />
+<script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
+
+<!-- 2. Table Container -->
+<div id="ea-events-table-container"></div>
+
+<!-- 3. Table Logic -->
+<script>
+    const ea_events = "/assets/data/events/ea-events-table.json";
+    const SITE_BASE_URL = "{{ '' | relative_url }}";
+
+    const monthOrder = {
+        "January": 1, "February": 2, "March": 3, "April": 4, "May": 5, "June": 6,
+        "July": 7, "August": 8, "September": 9, "October": 10, "November": 11, "December": 12,
+        "Jan": 1, "Feb": 2, "Mar": 3, "Apr": 4, "Jun": 6, "Jul": 7, "Aug": 8, "Sep": 9, "Oct": 10, "Nov": 11, "Dec": 12, "TBA": 13
+    };
+
+    function compareDates(a, b) {
+        if (!a) a = "";
+        if (!b) b = "";
+
+        const splitA = a.split(" ");
+        const splitB = b.split(" ");
+
+        const monthA = monthOrder[splitA[0]] || 0;
+        const monthB = monthOrder[splitB[0]] || 0;
+
+        if (monthA > monthB) return 1;
+        if (monthA < monthB) return -1;
+
+        const dayA = parseInt(splitA[1], 10) || 0;
+        const dayB = parseInt(splitB[1], 10) || 0;
+
+        if (dayA > dayB) return 1;
+        if (dayA < dayB) return -1;
+
+        return 0;
+    }
+
+    function buildTable(jsonPath, containerId) {
+        const fullUrl = `${SITE_BASE_URL}${jsonPath}`;
+
+        document.addEventListener("DOMContentLoaded", function() {
+            new gridjs.Grid({
+            // Define your column headers exactly as they appear in your CSV/JSON
+
+                columns: [
+                    {
+                    name: "Date",
+                        sort: { compare: compareDates}
+                    },
+                    "Event Name",
+                    "Category",
+                    {
+                        name: "Link",
+                        // The formatter intercepts the data before it hits the table
+                        formatter: (cell) => {
+                        if (cell === "TBA" || !cell) return "TBA";
+                        return gridjs.html(`
+                            <a href="${cell}" target="_blank">
+                            <img src="{{ '/assets/images/external-link.svg' | relative_url }}" style="width:14px;">
+                            </a>
+                        `);
+                        }
+                    }
+                ],
+            
+                // Features
+                search: true,
+                sort: true,
+                pagination: {
+                    limit: 10
+                },
+                resizable: true,
+                
+                // Data Loading
+                server: {
+                    url: fullUrl,
+                    then: data => {
+                        // 3. THE FIX: Sort the raw data instantly when it arrives from the JSON
+                        data.sort((rowA, rowB) => compareDates(rowA.Date, rowB.Date));
+
+                        // 4. Map the newly sorted data into the table
+                        return data.map(row => [
+                            row.Date,
+                            row['Event Name'],
+                            row.Category,
+                            row.Link
+                        ]);
+                        }
+                    
+                },
+                
+                // Styling
+                style: {
+                    table: {
+                    'font-size': '14px'
+                    }
+                }
+            }).render(document.getElementById(containerId));
+        });
+    }
+
+    buildTable(ea_events, "ea-events-table-container");
+
+    
+
+</script>
