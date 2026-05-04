@@ -4,7 +4,7 @@ title: VetMap
 permalink: /vet-map/
 ---
 
-# Veterinary Diseases and Pests of Cairns Region (work in progress)
+# (WIP) Veterinary Diseases and Pests of Cairns Region
 
 Cases of Meliodosis (Canine), Parvovirus (Canine), Leptospirosis (Canine) and Paralysis Ticks (Canine & Feline) present in the Cairns region. The intention is to visualise any geographically related statistics present. 
 
