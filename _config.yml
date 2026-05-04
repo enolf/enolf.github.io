@@ -18,19 +18,39 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: Nils Eisen
-# email: your-email@example.com
-description: >- # this means to ignore newlines until "baseurl:"
-  Personal website of Nils Eisen
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
-twitter_username: jekyllrb
-github_username:  jekyll
+title: enolf
+author:
+  name: Nils Eisen
+  # email: florian.eisen@my.jcu.edu.au
+  
+description: >
+  This is a portfolio of my projects (hobby or academic).
+# >- this means to ignore newlines until "baseurl:"
+
+# baseurl: "" # the subpath of your site, e.g. /blog
+# url: "https://enolf.github.io/" # the base hostname & protocol for your site, e.g. http://example.com
+# # twitter_username: jekyllrb
+# github_username:  enolf
 
 # Build settings
-theme: minima
+# theme: minima
+remote_theme: "jekyll/minima@1e8a445"
 plugins:
-  - jekyll-feed
+ - jekyll-feed
+ - jekyll-seo-tag
+
+collections:
+  pages:
+    output: true
+    permalink: /:name/
+
+minima:
+  skin: solarized-light
+  social_links:
+    - title: GitHub Profile
+      icon: github
+      url: "https://github.com/enolf/"
+  hide_site_feed_link: true
 
 # include: [assests/maps]
 
